@@ -10,6 +10,7 @@ class Player with _$Player {
     required String name,
     int? shirtNumber,
     required String preferredPosition,
+    @Default(false) bool unwillingGoalkeeper,
   }) = _Player;
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);

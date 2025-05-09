@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/squad_provider.dart';
+import '../state/player_provider.dart';
 import '../domain/models/player.dart';
 
 class SquadScreen extends ConsumerWidget {
@@ -8,7 +9,7 @@ class SquadScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final players = ref.watch(squadProvider);
+    final players = ref.watch(playerProvider);
 
     final nameCtrl = TextEditingController();
     final positionCtrl = TextEditingController();
@@ -41,7 +42,7 @@ class SquadScreen extends ConsumerWidget {
                       IconButton(
                         icon: const Icon(Icons.delete),
                         tooltip: 'Delete',
-                        onPressed: () => ref.read(squadProvider.notifier).removePlayer(player.id),
+                        onPressed: () => ref.read(playerProvider.notifier).removePlayer(player.id),
                       ),
                     ],
                   ),
@@ -61,7 +62,7 @@ class SquadScreen extends ConsumerWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  ref.read(squadProvider.notifier).addPlayer(
+                  ref.read(playerProvider.notifier).addPlayer(
                         nameCtrl.text,
                         positionCtrl.text,
                         shirtCtrl.text.isEmpty ? null : int.tryParse(shirtCtrl.text),
@@ -105,7 +106,7 @@ class SquadScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () {
-              ref.read(squadProvider.notifier).updatePlayer(
+              ref.read(playerProvider.notifier).updatePlayer(
                     player.id,
                     nameCtrl.text,
                     positionCtrl.text,

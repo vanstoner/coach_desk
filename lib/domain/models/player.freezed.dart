@@ -24,6 +24,7 @@ mixin _$Player {
   String get name => throw _privateConstructorUsedError;
   int? get shirtNumber => throw _privateConstructorUsedError;
   String get preferredPosition => throw _privateConstructorUsedError;
+  bool get unwillingGoalkeeper => throw _privateConstructorUsedError;
 
   /// Serializes this Player to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,11 @@ abstract class $PlayerCopyWith<$Res> {
       _$PlayerCopyWithImpl<$Res, Player>;
   @useResult
   $Res call(
-      {String id, String name, int? shirtNumber, String preferredPosition});
+      {String id,
+      String name,
+      int? shirtNumber,
+      String preferredPosition,
+      bool unwillingGoalkeeper});
 }
 
 /// @nodoc
@@ -62,6 +67,7 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? name = null,
     Object? shirtNumber = freezed,
     Object? preferredPosition = null,
+    Object? unwillingGoalkeeper = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -80,6 +86,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.preferredPosition
           : preferredPosition // ignore: cast_nullable_to_non_nullable
               as String,
+      unwillingGoalkeeper: null == unwillingGoalkeeper
+          ? _value.unwillingGoalkeeper
+          : unwillingGoalkeeper // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -92,7 +102,11 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id, String name, int? shirtNumber, String preferredPosition});
+      {String id,
+      String name,
+      int? shirtNumber,
+      String preferredPosition,
+      bool unwillingGoalkeeper});
 }
 
 /// @nodoc
@@ -112,6 +126,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? name = null,
     Object? shirtNumber = freezed,
     Object? preferredPosition = null,
+    Object? unwillingGoalkeeper = null,
   }) {
     return _then(_$PlayerImpl(
       id: null == id
@@ -130,6 +145,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.preferredPosition
           : preferredPosition // ignore: cast_nullable_to_non_nullable
               as String,
+      unwillingGoalkeeper: null == unwillingGoalkeeper
+          ? _value.unwillingGoalkeeper
+          : unwillingGoalkeeper // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -141,7 +160,8 @@ class _$PlayerImpl implements _Player {
       {required this.id,
       required this.name,
       this.shirtNumber,
-      required this.preferredPosition});
+      required this.preferredPosition,
+      this.unwillingGoalkeeper = false});
 
   factory _$PlayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlayerImplFromJson(json);
@@ -154,10 +174,13 @@ class _$PlayerImpl implements _Player {
   final int? shirtNumber;
   @override
   final String preferredPosition;
+  @override
+  @JsonKey()
+  final bool unwillingGoalkeeper;
 
   @override
   String toString() {
-    return 'Player(id: $id, name: $name, shirtNumber: $shirtNumber, preferredPosition: $preferredPosition)';
+    return 'Player(id: $id, name: $name, shirtNumber: $shirtNumber, preferredPosition: $preferredPosition, unwillingGoalkeeper: $unwillingGoalkeeper)';
   }
 
   @override
@@ -170,13 +193,15 @@ class _$PlayerImpl implements _Player {
             (identical(other.shirtNumber, shirtNumber) ||
                 other.shirtNumber == shirtNumber) &&
             (identical(other.preferredPosition, preferredPosition) ||
-                other.preferredPosition == preferredPosition));
+                other.preferredPosition == preferredPosition) &&
+            (identical(other.unwillingGoalkeeper, unwillingGoalkeeper) ||
+                other.unwillingGoalkeeper == unwillingGoalkeeper));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, shirtNumber, preferredPosition);
+  int get hashCode => Object.hash(runtimeType, id, name, shirtNumber,
+      preferredPosition, unwillingGoalkeeper);
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.
@@ -199,7 +224,8 @@ abstract class _Player implements Player {
       {required final String id,
       required final String name,
       final int? shirtNumber,
-      required final String preferredPosition}) = _$PlayerImpl;
+      required final String preferredPosition,
+      final bool unwillingGoalkeeper}) = _$PlayerImpl;
 
   factory _Player.fromJson(Map<String, dynamic> json) = _$PlayerImpl.fromJson;
 
@@ -211,6 +237,8 @@ abstract class _Player implements Player {
   int? get shirtNumber;
   @override
   String get preferredPosition;
+  @override
+  bool get unwillingGoalkeeper;
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.

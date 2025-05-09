@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import '../domain/models/player.dart';
-import '../domain/repositories/player_repository.dart';
+import '../domain/models/squad.dart';
+import '../domain/repositories/squad_repository.dart';
 import 'providers.dart';
 
-final squadProvider = StateNotifierProvider<SquadNotifier, List<Player>>((ref) {
-  return SquadNotifier(ref.read(playerRepositoryProvider));
+final squadProvider = StateNotifierProvider<SquadNotifier, List<Squad>>((ref) {
+  return SquadNotifier(ref.read(squadRepositoryProvider));
 });
 
-class SquadNotifier extends StateNotifier<List<Player>> {
-  final PlayerRepository _repo;
+class SquadNotifier extends StateNotifier<List<Squad>> {
+  final SquadRepository _repo;
   final _uuid = const Uuid();
 
   SquadNotifier(this._repo) : super([]) {
@@ -17,38 +17,32 @@ class SquadNotifier extends StateNotifier<List<Player>> {
   }
 
   void _load() async {
-    final players = await _repo.getPlayers();
-    state = players;
+    final squads = await _repo.getSquads();
+    state = squads;
   }
 
-  Future<void> addPlayer(String name, String position, int? shirtNumber) async {
-    final player = Player(
+  Future<void> addSquad(String name, List<String> playerIds, String captainId) async {
+    final squad = Squad(
       id: _uuid.v4(),
       name: name,
-      preferredPosition: position,
-      shirtNumber: shirtNumber,
+      playerIds: playerIds,
+      captainId: captainId,
     );
-    await _repo.addPlayer(player);
-    state = [...state, player];
+    await _repo.addSquad(squad);
+    state = [...state, squad];
   }
 
-  Future<void> updatePlayer(String id, String name, String position, int? shirtNumber) async {
-    final updated = Player(
-      id: id,
-      name: name,
-      preferredPosition: position,
-      shirtNumber: shirtNumber,
-    );
-    await _repo.addPlayer(updated);
+  Future<void> updateSquad(Squad updated) async {
+    await _repo.addSquad(updated);
     state = [
-      for (final p in state)
-        if (p.id == id) updated else p,
+      for (final s in state)
+        if (s.id == updated.id) updated else s,
     ];
   }
 
-  Future<void> removePlayer(String id) async {
-    await _repo.removePlayer(id);
-    state = state.where((p) => p.id != id).toList();
+  Future<void> removeSquad(String id) async {
+    await _repo.removeSquad(id);
+    state = state.where((s) => s.id != id).toList();
   }
 }
 

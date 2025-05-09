@@ -11,6 +11,7 @@ _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
       name: json['name'] as String,
       shirtNumber: (json['shirtNumber'] as num?)?.toInt(),
       preferredPosition: json['preferredPosition'] as String,
+      unwillingGoalkeeper: json['unwillingGoalkeeper'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
       'name': instance.name,
       'shirtNumber': instance.shirtNumber,
       'preferredPosition': instance.preferredPosition,
+      'unwillingGoalkeeper': instance.unwillingGoalkeeper,
     };
