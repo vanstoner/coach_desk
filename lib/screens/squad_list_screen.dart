@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/squad_provider.dart';
-import '../domain/models/squad.dart';
 import 'squad_detail_screen.dart';
 
 class SquadListScreen extends ConsumerWidget {
@@ -13,58 +12,69 @@ class SquadListScreen extends ConsumerWidget {
     final controller = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Squads')),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: squads.length,
-              itemBuilder: (_, index) {
-                final squad = squads[index];
-                return ListTile(
-                  title: Text(squad.name),
-                  subtitle: Text('${squad.playerIds.length} players'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => SquadDetailScreen(squad: squad),
-                      ),
-                    );
-                  },
-                );
-              },
+        appBar: AppBar(title: const Text('Squads')),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Opacity(
+              opacity: 0.0,
+              child: Image.asset(
+                'assets/images/blank.jpg',
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
+            Column(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                      labelText: 'New Squad Name',
-                    ),
+                  child: ListView.builder(
+                    itemCount: squads.length,
+                    itemBuilder: (_, index) {
+                      final squad = squads[index];
+                      return ListTile(
+                        title: Text(squad.name),
+                        subtitle: Text('${squad.playerIds.length} players'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => SquadDetailScreen(squad: squad),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  child: const Text('Add'),
-                  onPressed: () {
-                    final name = controller.text.trim();
-                    if (name.isNotEmpty) {
-                      ref.read(squadProvider.notifier).addSquad(name, [], '');
-                      controller.clear();
-                    }
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: controller,
+                          decoration: const InputDecoration(
+                            labelText: 'New Squad Name',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        child: const Text('Add'),
+                        onPressed: () {
+                          final name = controller.text.trim();
+                          if (name.isNotEmpty) {
+                            ref.read(squadProvider.notifier).addSquad(name, [], '');
+                            controller.clear();
+                          }
+                        },
+                      )
+                    ],
+                  ),
                 )
               ],
             ),
-          )
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
-

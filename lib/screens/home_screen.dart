@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'squad_list_screen.dart';
+import 'match_list_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,8 @@ class HomeScreen extends StatelessWidget {
             opacity: 0.2,
             child: Image.asset(
               'assets/images/coachdesk_background.jpg',
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
+              alignment: Alignment.topCenter,
             ),
           ),
           Center(
@@ -36,8 +38,8 @@ class HomeScreen extends StatelessWidget {
                   icon: const Icon(Icons.sports_soccer),
                   label: const Text('Matches'),
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Match feature coming soon')),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const MatchListScreen()),
                     );
                   },
                 ),
@@ -49,4 +51,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,0 +1,20 @@
+{
+  // Format code automatically on save
+  "editor.formatOnSave": true,
+  // Dart-specific: use formatter and show widget closing labels
+  "dart.lineLength": 100,
+  "dart.formatOnSave": true,
+  "dart.showTodos": true,
+  "dart.showFlutterWidgetGuides": true,
+  "dart.closingLabels": true,
+  // Enable colourised bracket pairs
+  "editor.bracketPairColorization.enabled": true,
+  // Linting and error visibility
+  "dart.analysisExcludedFolders": [
+    "build/"
+  ],
+  "dart.analysisServerFolding": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
+}

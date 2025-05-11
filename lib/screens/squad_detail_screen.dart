@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../domain/models/player.dart';
 import '../domain/models/squad.dart';
 import '../state/player_provider.dart';
 import '../state/squad_provider.dart';
@@ -70,9 +69,8 @@ class _SquadDetailScreenState extends ConsumerState<SquadDetailScreen> {
             const Text('Select Captain:', style: TextStyle(fontSize: 16)),
             DropdownButton<String>(
               isExpanded: true,
-              value: captainId.isNotEmpty && selectedPlayerIds.contains(captainId)
-                  ? captainId
-                  : null,
+              value:
+                  captainId.isNotEmpty && selectedPlayerIds.contains(captainId) ? captainId : null,
               items: selectedPlayerIds
                   .map((id) => DropdownMenuItem<String>(
                         value: id,
@@ -106,4 +104,3 @@ class _SquadDetailScreenState extends ConsumerState<SquadDetailScreen> {
     );
   }
 }
-

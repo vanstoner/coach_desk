@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../state/squad_provider.dart';
 import '../state/player_provider.dart';
 import '../domain/models/player.dart';
 
@@ -54,7 +53,9 @@ class SquadScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(children: [
               TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
-              TextField(controller: positionCtrl, decoration: const InputDecoration(labelText: 'Preferred Position')),
+              TextField(
+                  controller: positionCtrl,
+                  decoration: const InputDecoration(labelText: 'Preferred Position')),
               TextField(
                 controller: shirtCtrl,
                 keyboardType: TextInputType.number,
@@ -95,7 +96,9 @@ class SquadScreen extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
-            TextField(controller: positionCtrl, decoration: const InputDecoration(labelText: 'Preferred Position')),
+            TextField(
+                controller: positionCtrl,
+                decoration: const InputDecoration(labelText: 'Preferred Position')),
             TextField(
               controller: shirtCtrl,
               keyboardType: TextInputType.number,
@@ -125,4 +128,3 @@ class SquadScreen extends ConsumerWidget {
     );
   }
 }
-
